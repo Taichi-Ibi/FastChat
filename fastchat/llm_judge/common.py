@@ -418,17 +418,13 @@ def play_a_match_pair(match: MatchPair, output_file: str):
 
 def setup_openai_api(model: str, use_azure=False):
     from functools import partial
-
-    if model == "gpt-3.5-turbo":
-        deployment_id = "misc-35"
-    elif model == "gpt-4":
-        deployment_id = "misc-4"
-    elif model == "gpt-4-0125-preview":
-        deployment_id = "misc-4"  
-    else:
-        raise NotImplementedError(f"{model=}")
-
     if use_azure:
+        if model == "gpt-3.5-turbo":
+            deployment_id = "misc-35"
+        elif model == "gpt-4":
+            deployment_id = "misc-4"
+        else:
+            raise NotImplementedError(f"{model=}")
         openai.api_type = "azure"
         openai.api_key = os.environ['OPENAI_AZURE_API_KEY']
         openai.api_base = os.environ['OPENAI_AZURE_API_BASE']
