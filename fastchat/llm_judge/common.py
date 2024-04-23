@@ -419,9 +419,10 @@ def play_a_match_pair(match: MatchPair, output_file: str):
 def setup_openai_api(model: str, use_azure=False):
     from functools import partial
 
+    gpt_4_family = ["gpt-4", "gpt-4-turbo-2024-04-09"]
     if model == "gpt-3.5-turbo":
         deployment_id = "misc-35"
-    elif model == "gpt-4":
+    elif model in gpt_4_family:
         deployment_id = "misc-4"
     else:
         raise NotImplementedError(f"{model=}")
